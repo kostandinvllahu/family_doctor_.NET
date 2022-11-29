@@ -1,0 +1,28 @@
+﻿body {
+    background: #eee;
+}
+
+.wrapper {
+    margin: 80px;
+}
+
+.form-register {
+    max-width: 380px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px 40px 50px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+    .form-register .form-register-heading .form-register, .text {
+        margin-bottom: 30px;
+    }
+
+    .form-register input[type="text"], .form-register input[type="email"], .form-register input[type="password"], .text {
+        margin-bottom: 20px;
+    }
+
+    .form-register .form-control {
+        padding: 10px;
+    }

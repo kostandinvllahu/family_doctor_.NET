@@ -1,0 +1,49 @@
+﻿.body {
+    background: #eee;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 4%;
+    width: 100%;
+}
+
+img {
+    width: 100%;
+    border-radius: 20px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.box {
+    border-radius: 20px;
+    padding: 10px;
+    width: 100%;
+    background: #fff;
+    height: 100%;
+    object-fit: cover;
+}
+
+    .box img {
+        display: block;
+        margin: 0 auto;
+    }
+
+p {
+    color: #1177ca;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+p:hover {
+    color: #f0144c;
+}
+
+.box:hover {
+    background: #f0144c;
+}
