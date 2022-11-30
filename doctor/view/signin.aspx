@@ -17,15 +17,16 @@
 	</head>
 	<body>
 	
-	<div class="wrapper">
-	<form method="post" class="form-register">
+	<div class="wrapper" runat="server">
+	<form method="post" class="form-register" runat="server">
 	<h2 class="form-register-heading text-center">Create Account</h2> 
-	<input type="text" class="form-control" name="full_name" placeholder="Full Name" required="" autofocus=""/>
-	<input type="email" class="form-control" name="email" placeholder="Email" required="" autofocus=""/>
-	<input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus=""/>
-	<input type="password" class="form-control" name="password" placeholder="Password" required=""/>
-	<button name="register" class="btn btn-lg btn btn-primary btn-block">Register</button><br>
-	<p class="text">Already have an account? <a href=".../../login.aspx">Login</a></p>	
+    <asp:TextBox runat="server" ID="txtFullName" CssClass="form-control" placeholder="Full Name" required="" autofocus=""/>
+    <asp:TextBox runat="server" ID="txtEmail" TextMode="Email" CssClass="form-control" placeholder="Email" required="" autofocus=""/>
+    <asp:TextBox runat="server" ID="txtUsername" CssClass="form-control" placeholder="Username" required="" autofocus=""/>
+    <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" placeholder="Password" required="" autofocus=""/>
+    <asp:Button Text="Login" ID="btnLogin" CssClass="btn btn-lg btn btn-primary btn-block" runat="server" OnClick="btnLogin_Click" />
+	<p class="text">Already have an account? <a href=".../../login.aspx">Login</a></p>	<br />
+        <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 	</form>
 	</div>
 	</body>	
