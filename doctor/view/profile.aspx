@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="doctor.view.profile" %>
 <!--#include virtual="navbar.aspx"-->
 <title>Users Profile</title>
-<form method="post">
+<form method="post" runat="server">
   <div class="form-row">
   <div class="form-group col-md-6">
   	<label for="inputEmail4">Full Name</label>

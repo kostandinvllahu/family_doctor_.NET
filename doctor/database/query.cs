@@ -8,9 +8,9 @@ namespace doctor.database
 {
     public class Query
     {
-        public static Users CheckRegister(Users obj)
+        public static Users Login(Users obj)
         {
-            string sqlQuery = "";
+            string sqlQuery = "SELECT  username,password from login where (username=@username) and (password=@password)";
 
             using (var con = Script.GetConnection())
             {

@@ -18,7 +18,6 @@ namespace doctor.view
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            var regexItem = new Regex("^[a-zA-Z0-9 ]*$");
             lblError.Text = "";
             if (txtPassword.Text.Length < 8)
             {

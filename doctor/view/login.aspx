@@ -18,14 +18,15 @@
 	</head>
 	<body>
 	
-	<div class="wrapper">
-	<form method="post" class="form-register">
+	<div class="wrapper" runat="server">
+	<form method="post" class="form-register" runat="server">
 	<h2 class="form-register-heading text-center">Login Panel</h2> 
-	<input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus=""/>
-	<input type="password" class="form-control" name="password" placeholder="Password" required=""/>
-	<button name="login" class="btn btn-lg btn btn-primary btn-block">Log In</button><br>
+     <asp:TextBox runat="server" ID="txtusername" CssClass="form-control" placeholder="Username" required="" autofocus=""/>
+     <asp:TextBox runat="server" ID="txtpassword" TextMode="Password" CssClass="form-control" placeholder="Password" required="" autofocus=""/>
+    <asp:Button Text="Login" ID="btnLogin" CssClass="btn btn-lg btn btn-primary btn-block" runat="server" OnClick="btnLogin_Click" />
 	<p class="text">Dont have an account? <a href=".../../signin.aspx">Register</a></p>	
-	<p class="text"><a href="#">Forgot Password</a></p>
+	<p class="text"><a href="#">Forgot Password</a></p><br />
+         <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 	</form>
 	</div>
 	</body>	
