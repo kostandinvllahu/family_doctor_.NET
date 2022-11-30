@@ -5,56 +5,47 @@
   <div class="form-row">
   <div class="form-group col-md-6">
   	<label for="inputEmail4">Full Name</label>
-      <input type="text" class="form-control" id="inputEmail4" name="fullname" placeholder="Full Name" required value="">
+      <asp:TextBox runat="server" ID="txtFullName" CssClass="form-control" placeholder="Full Name" required=""/>
   </div>
    <div class="form-group col-md-6">
   	<label for="inputPassword4">ID Card Number</label>
-      <input type="text" class="form-control" id="inputPassword4" name="idcard" placeholder="ID Card Number" required value="">
+       <asp:TextBox runat="server" ID="txtIdCard" CssClass="form-control" placeholder="ID Card Number" required=""/>
   </div>
     <div class="form-group col-md-6">	
       <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email" required value="">
+        <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Email" required=""/>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" name="password" placeholder="Password" required value="">
+        <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" placeholder="Password" />
     </div>
   </div>
   <div class="form-group">
     <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St" required value="">
+      <asp:TextBox runat="server" ID="txtAddress" CssClass="form-control" placeholder="1234 Main St" required=""/>
   </div>
   <div class="form-group">
     <label for="inputAddress">Phone Number</label>
-    <input type="tel" class="form-control" id="inputAddress" name="phone" placeholder="0697830800" required value="">
+      <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" placeholder="0697830800" required=""/>
   </div>
   <div class="form-group">
     <label for="inputAddress2">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" name="addresstwo" placeholder="Apartment, studio, or floor" required value="">
+      <asp:TextBox runat="server" ID="txtAddress2" CssClass="form-control" placeholder="1234 Apartment, studio or floor"/>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity" name="city" required value="">
+        <asp:TextBox runat="server" ID="txtCity" CssClass="form-control" placeholder="Tirana" required=""/>
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">State</label>
-      <select id="inputState" class="form-control"required name="state">
-	    <option value="none" selected disabled hidden>Select an Option</option>
-        <option>Albania</option>
-		<option>Bosnia</option>
-		<option>Croatia</option>
-		<option>Montenegro</option>
-		<option>Serbia</option>
-		<option>Slovenia</option>
-		<option>Greece</option>
-		<option>Macedonia</option>
-      </select>
+     <asp:TextBox runat="server" ID="txtState" CssClass="form-control" placeholder="Albania" required=""/>
     </div>
     <div class="form-group col-md-2">
       <label for="inputZip">Zip</label>
-      <input type="number" class="form-control" name="zip" id="inputZip" required value="">
+        <asp:TextBox runat="server" ID="txtZip" CssClass="form-control" placeholder="1060" required=""/>
     </div>
   </div>
-  <button type="submit" name="profile" class="btn btn-primary">Save</button>
+     <asp:Button Text="Save" ID="btnSave" CssClass="btn btn-lg btn btn-primary" runat="server" OnClick="btnSave_Click" />
+    <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 </form>

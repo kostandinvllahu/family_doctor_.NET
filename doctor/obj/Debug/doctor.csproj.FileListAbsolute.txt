@@ -49,7 +49,6 @@ C:\Users\vllah\source\repos\doctor\doctor\bin\roslyn\VBCSCompiler.exe
 C:\Users\vllah\source\repos\doctor\doctor\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\vllah\source\repos\doctor\doctor\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\vllah\source\repos\doctor\doctor\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\vllah\source\repos\doctor\doctor\obj\Debug\doctor.csprojAssemblyReference.cache
 C:\Users\vllah\source\repos\doctor\doctor\obj\Debug\doctor.csproj.CoreCompileInputs.cache
 C:\Users\vllah\source\repos\doctor\doctor\obj\Debug\doctor.csproj.CopyComplete
 C:\Users\vllah\source\repos\doctor\doctor\obj\Debug\doctor.dll
@@ -78,3 +77,4 @@ C:\Users\vllah\source\repos\doctor\doctor\bin\System.Numerics.Vectors.xml
 C:\Users\vllah\source\repos\doctor\doctor\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\vllah\source\repos\doctor\doctor\bin\Dapper.dll
 C:\Users\vllah\source\repos\doctor\doctor\bin\Dapper.xml
+C:\Users\vllah\source\repos\doctor\doctor\obj\Debug\doctor.csprojAssemblyReference.cache

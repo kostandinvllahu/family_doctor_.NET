@@ -1,5 +1,4 @@
 ﻿
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +31,7 @@
 			<li><a href="profile.aspx">Profile of user</a></li>
 			<li><a href="news.aspx">News</a></li>
 			<li><a href="about.aspx">About</a></li> 
-			<li><a href="logout.aspx">Log out</a></li>
+			<li><a href="login.aspx">Log out</a></li>
 			</ul>
         </div>
       </div>

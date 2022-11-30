@@ -19,9 +19,9 @@ namespace doctor.view
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             lblError.Text = "";
-            if (txtPassword.Text.Length < 8)
+            if (txtPassword.Text.Length <= 8)
             {
-                lblError.Text = "Your password must be at least 8 characters long";
+                lblError.Text = "Your password must be more then 8 characters long";
                 return;
             }
 
@@ -37,6 +37,20 @@ namespace doctor.view
                 password = password,
                 username = username
             };
+
+             var user = Query.VerifyEmail(users);
+
+            if (user != null)
+            {
+                lblError.Text = "Email is already registered login?";
+                return;
+            }
+            user = Query.VerifyUsername(users);
+            if(user != null)
+            {
+                lblError.Text = "Username is taken please choose another one.";
+                return;
+            }
 
             if (Query.Insert(users))
             {

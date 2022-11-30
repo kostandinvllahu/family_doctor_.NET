@@ -12,7 +12,8 @@ namespace doctor.view
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
+            Session.Contents.RemoveAll();
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -30,6 +31,8 @@ namespace doctor.view
             var user = Query.Login(obj);
             if(user != null)
             {
+                Session["username"] = txtusername.Text;
+                Session["password"] = txtpassword.Text;
                 Response.Redirect("main.aspx");
             }
             else

@@ -11,6 +11,10 @@ namespace doctor.view
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["username"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
 
         }
     }
