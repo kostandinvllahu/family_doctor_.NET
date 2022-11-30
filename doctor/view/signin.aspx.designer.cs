@@ -49,6 +49,15 @@ namespace doctor.view {
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
+        /// selectdoctor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList selectdoctor;
+        
+        /// <summary>
         /// btnLogin control.
         /// </summary>
         /// <remarks>

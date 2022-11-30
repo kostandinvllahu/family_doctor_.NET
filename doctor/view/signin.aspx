@@ -24,6 +24,7 @@
     <asp:TextBox runat="server" ID="txtEmail" TextMode="Email" CssClass="form-control" placeholder="Email" required="" autofocus=""/>
     <asp:TextBox runat="server" ID="txtUsername" CssClass="form-control" placeholder="Username" required="" autofocus=""/>
     <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" placeholder="Password" required="" autofocus=""/>
+    <asp:DropDownList runat="server" ID="selectdoctor" CssClass="form-control" AppendDataBoundItems="true"></asp:DropDownList><br />
     <asp:Button Text="Login" ID="btnLogin" CssClass="btn btn-lg btn btn-primary btn-block" runat="server" OnClick="btnLogin_Click" />
 	<p class="text">Already have an account? <a href=".../../login.aspx">Login</a></p>	<br />
         <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />

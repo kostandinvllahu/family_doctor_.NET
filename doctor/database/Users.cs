@@ -31,5 +31,7 @@ namespace doctor.database
 
         public string zipcode { get; set; }
 
+        public string doctor { get; set; }
+
     }
 }

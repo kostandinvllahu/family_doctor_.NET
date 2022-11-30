@@ -1,6 +1,9 @@
 ﻿using doctor.database;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -13,7 +16,15 @@ namespace doctor.view
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var con = Script.GetConnection();
+            string sql = "select * from doctor";
+            SqlDataAdapter sda = new SqlDataAdapter(sql, con);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            selectdoctor.DataSource = dt;
+            selectdoctor.DataTextField = "fullname";
+            selectdoctor.DataValueField = "id";
+            selectdoctor.DataBind();
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -29,13 +40,15 @@ namespace doctor.view
             var email = txtEmail.Text.Trim();
             var password = txtPassword.Text.Trim();
             var fullname = txtFullName.Text.Trim();
+            var doctor = selectdoctor.SelectedItem.Value;
 
             var users = new database.Users
             {
                 fullname = fullname,
                 email = email,
                 password = password,
-                username = username
+                username = username,
+                doctor = doctor
             };
 
              var user = Query.VerifyEmail(users);

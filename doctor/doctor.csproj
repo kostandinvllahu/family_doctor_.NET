@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="view\checkup.aspx" />
     <Content Include="view\css\main.css" />
     <Content Include="view\css\navbar.css" />
     <Content Include="view\css\signin.css" />
@@ -124,10 +125,18 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="database\Doctor.cs" />
     <Compile Include="database\query.cs" />
     <Compile Include="database\script.cs" />
     <Compile Include="database\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="view\checkup.aspx.cs">
+      <DependentUpon>checkup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\checkup.aspx.designer.cs">
+      <DependentUpon>checkup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="view\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

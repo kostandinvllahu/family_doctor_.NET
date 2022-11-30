@@ -38,13 +38,22 @@ namespace doctor.database
 
         public static bool Insert(Users user)
         {
-            string sql = "INSERT INTO login (fullname, email, username, password) VALUES (@fullname, @email, @username, @password)";
+            string sql = "INSERT INTO login (fullname, email, username, password, doctor) VALUES (@fullname, @email, @username, @password, @doctor)";
 
             using (var con = Script.GetConnection())
             {
                 return con.Execute(sql, user) > 0;
             }
         }
+
+        public static Doctor FetchDoctor()
+        {
+            string sqlQuery = "SELECT * from doctor";
+            using (var con = Script.GetConnection())
+            {
+                return con.Query<Doctor>(sqlQuery).FirstOrDefault();
+            }
+        } 
 
         public static bool Update(Users user)
         {
