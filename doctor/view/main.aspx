@@ -13,7 +13,7 @@
 	<div class="wrapper">
 	<div class="box">
 	<img src="images/checkup.png">
-	<a href="#"><p>Check up</p></a>
+	<a href=".../../checkup.aspx"><p>Check up</p></a>
 	</div>
 	<div class="box">
 	<img src="images/drugs.png"></img>
