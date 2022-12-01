@@ -14,6 +14,7 @@ namespace doctor.view
     {
         String sql = "";
         Boolean check = false;
+        int num = 0;
        
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,7 +39,7 @@ namespace doctor.view
                 Time = selectTime.SelectedItem.Value,
                 Date = txtDate.SelectedDate.ToShortDateString()
         };
-            CheckTime(Convert.ToDateTime(selectTime.SelectedItem.Value));
+            CheckTime(Convert.ToDateTime(selectTime.SelectedItem.Value), Convert.ToDateTime(txtDate.SelectedDate.ToShortDateString()), txtDate.SelectedDate.DayOfWeek.ToString());
             if (check)
             {
                 sql = "INSERT INTO appointments (doctorname, doctoremail, patientname, service, comment, time, date) VALUES" +
@@ -71,13 +72,38 @@ namespace doctor.view
             }
         }
 
-        private void CheckTime(DateTime selectedTime)
+        private void CheckTime(DateTime selectedTime, DateTime selectDay, String weekname)
          {
-            if(Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) > selectedTime)
+            if (weekname.Equals("Sunday"))
             {
-                lblError.Text = "This time has passed please choose different time!";
+                lblError.Text = "Today is Sunday we are closed please choose another day of the week!";
                 check = false;
             }
+            else
+            {
+                if (selectDay < DateTime.Today)
+                {
+                    lblError.Text = "This date has passed please choose different time!";
+                    check = false;
+                }
+
+                if (selectDay == DateTime.Today)
+                {
+                    if (Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) > selectedTime)
+                    {
+                        lblError.Text = "This time has passed please choose different time!";
+                        check = false;
+                    }
+                    else
+                    {
+                        check = true;
+                    }
+                }
+                else
+                {
+                    check = true;
+                }
+            } 
         }
 
    
