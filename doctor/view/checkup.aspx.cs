@@ -13,6 +13,7 @@ namespace doctor.view
     public partial class checkup : System.Web.UI.Page
     {
         String sql = "";
+        Boolean check = false;
        
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +23,7 @@ namespace doctor.view
                 return;
             }
             GetValues();
-            GetTime();
+            Global.bindDropdown(selectTime, "select * from time where status='1'", "time", "time");
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -37,23 +38,24 @@ namespace doctor.view
                 Time = selectTime.SelectedItem.Value,
                 Date = txtDate.SelectedDate.ToShortDateString()
         };
-            sql = "INSERT INTO appointments (doctorname, doctoremail, patientname, service, comment, time, date) VALUES" +
-                " (@Doctorname, @Doctoremail, @Patientname, @Service, @Comment, @Time, @Date)";
-            if (Query.Insert(appointment, sql))
+            CheckTime(Convert.ToDateTime(selectTime.SelectedItem.Value));
+            if (check)
             {
-                lblError.Text = "Appointment booked successfully!";
-                sql = "update time set status=0 where time=@Time";
-                Query.Update(appointment, sql);
-                return; //beje refresh faqen ketu
+                sql = "INSERT INTO appointments (doctorname, doctoremail, patientname, service, comment, time, date) VALUES" +
+                    " (@Doctorname, @Doctoremail, @Patientname, @Service, @Comment, @Time, @Date)";
+                if (Query.Insert(appointment, sql))
+                {
+                    lblError.Text = "Appointment booked successfully!";
+                    sql = "update time set status=0 where time=@Time";
+                    Query.Update(appointment, sql);
+                    return; //beje refresh faqen ketu
+                }
+                else
+                {
+                    lblError.Text = "Opss.. Something went wrong!";
+                    return;
+                }
             }
-            else
-            {
-                lblError.Text = "Opss.. Something went wrong!";
-                return;
-            }
-
-
-
         }
 
         private void GetValues()
@@ -69,17 +71,15 @@ namespace doctor.view
             }
         }
 
-        private void GetTime()
-        {
-            var con = Script.GetConnection();
-            sql = "select * from time where status='1'";
-            SqlDataAdapter sda = new SqlDataAdapter(sql, con);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            selectTime.DataSource = dt;
-            selectTime.DataTextField = "time";
-            selectTime.DataValueField = "time";
-            selectTime.DataBind();
+        private void CheckTime(DateTime selectedTime)
+         {
+            if(Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) > selectedTime)
+            {
+                lblError.Text = "This time has passed please choose different time!";
+                check = false;
+            }
         }
+
+   
     }
 }

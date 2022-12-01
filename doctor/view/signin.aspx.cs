@@ -17,15 +17,7 @@ namespace doctor.view
         String sql = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            var con = Script.GetConnection();
-            string sql = "select * from doctor";
-            SqlDataAdapter sda = new SqlDataAdapter(sql, con);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            selectdoctor.DataSource = dt;
-            selectdoctor.DataTextField = "fullname";
-            selectdoctor.DataValueField = "id";
-            selectdoctor.DataBind();
+            Global.bindDropdown(selectdoctor, "select * from doctor", "fullname", "id");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

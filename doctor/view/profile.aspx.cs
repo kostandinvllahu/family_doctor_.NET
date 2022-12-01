@@ -12,14 +12,18 @@ namespace doctor.view
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["username"] == null)
+            if (!Page.IsPostBack)
             {
-                Response.Redirect("login.aspx");
+                if (Session["username"] == null)
+                {
+                    Response.Redirect("login.aspx");
+                }
+                else
+                {
+                    GetValues();
+                }
             }
-            else
-            {
-                GetValues();
-            }
+            
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
