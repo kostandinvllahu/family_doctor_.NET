@@ -129,6 +129,7 @@
     <Compile Include="database\Doctor.cs" />
     <Compile Include="database\query.cs" />
     <Compile Include="database\script.cs" />
+    <Compile Include="database\time.cs" />
     <Compile Include="database\Users.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
