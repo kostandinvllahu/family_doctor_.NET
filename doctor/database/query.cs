@@ -18,28 +18,17 @@ namespace doctor.database
             }
         }
         
-        public static Users VerifyEmail(Users obj)
+        public static Users VerifyEmail(Object obj, String sql)
         {
-            string sqlQuery = "SELECT  * from login where (email=@email)";
             using (var con = Script.GetConnection())
             {
-                return con.Query<Users>(sqlQuery, obj).FirstOrDefault();
+                return con.Query<Users>(sql, obj).FirstOrDefault();
             }
         }
 
-        public static Users VerifyUsername(Users obj)
+    
+        public static bool Insert(Object user, String sql)
         {
-            string sqlQuery = "SELECT  * from login where (username=@username)";
-            using (var con = Script.GetConnection())
-            {
-                return con.Query<Users>(sqlQuery, obj).FirstOrDefault();
-            }
-        }
-
-        public static bool Insert(Users user)
-        {
-            string sql = "INSERT INTO login (fullname, email, username, password, doctor) VALUES (@fullname, @email, @username, @password, @doctor)";
-
             using (var con = Script.GetConnection())
             {
                 return con.Execute(sql, user) > 0;
@@ -55,9 +44,8 @@ namespace doctor.database
             }
         } 
 
-        public static bool Update(Users user)
+        public static bool Update(Object user, String sql)
         {
-            string sql = "UPDATE login set fullname=@fullname, email=@email, password=@password, idcard=@idcard, address=@address, addresstwo=@addresstwo, phone=@phone, city=@city, state=@state, zipcode=@zipcode where username=@username";
             using (var con = Script.GetConnection())
             {
                 return con.Execute(sql, user) > 0;

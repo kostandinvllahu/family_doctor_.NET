@@ -12,48 +12,40 @@
 <form method="post" runat="server">
   <div class="form-row">
   <div class="form-group col-md-6">
-  	<label for="inputEmail4">Full Name</label>
-      <asp:TextBox runat="server" ID="txtFullName" CssClass="form-control" placeholder="Full Name" required=""/>
+  	<label for="inputEmail4">Doctor Name</label>
+      <asp:TextBox runat="server" ID="txtDoctorName" CssClass="form-control" placeholder="Doctor Name"/>
   </div>
-   <div class="form-group col-md-6">
-  	<label for="inputPassword4">ID Card Number</label>
-       <asp:TextBox runat="server" ID="txtIdCard" CssClass="form-control" placeholder="ID Card Number" required=""/>
+ <div class="form-group col-md-6">
+  	<label for="inputPassword4">Time Schedule</label>
+       <asp:DropDownList runat="server" ID="selectTime" CssClass="form-control" AppendDataBoundItems="true"></asp:DropDownList>
   </div>
     <div class="form-group col-md-6">	
       <label for="inputEmail4">Email</label>
         <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="Email" required=""/>
     </div>
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-        <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" placeholder="Password" />
+    
+      <div class="form-group col-md-6">
+  	<label for="inputPassword4">Service</label>
+       <asp:DropDownList runat="server" ID="selectService" CssClass="form-control" AppendDataBoundItems="true">
+           <asp:ListItem Enabled="true" Text= "Blood Analysis" Value= "1"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Stress Test" Value= "2"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Tension Holter" Value= "3"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Rythm Holter" Value= "4"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Testicular Echo" Value= "5"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Breast Echography" Value= "6"></asp:ListItem>
+       </asp:DropDownList>
+  </div>
+
+  <div class="form-group col-md-6">
+    <label for="inputAddress">Comment</label>
+      <asp:TextBox runat="server" ID="txtComment" TextMode="MultiLine" Rows="10" CssClass="form-control" placeholder="Tell us how do you feel today..." required=""/>
+  </div>
+
+      <div class="form-group col-md-6">
+      <label for="inputPassword4">Date</label>
+        <asp:Calendar runat="server" ID="txtDate" CssClass="form-control" placeholder="Date"></asp:Calendar>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="inputAddress">Address</label>
-      <asp:TextBox runat="server" ID="txtAddress" CssClass="form-control" placeholder="1234 Main St" required=""/>
-  </div>
-  <div class="form-group">
-    <label for="inputAddress">Phone Number</label>
-      <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" placeholder="0697830800" required=""/>
-  </div>
-  <div class="form-group">
-    <label for="inputAddress2">Address 2</label>
-      <asp:TextBox runat="server" ID="txtAddress2" CssClass="form-control" placeholder="1234 Apartment, studio or floor"/>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-        <asp:TextBox runat="server" ID="txtCity" CssClass="form-control" placeholder="Tirana" required=""/>
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-     <asp:TextBox runat="server" ID="txtState" CssClass="form-control" placeholder="Albania" required=""/>
-    </div>
-    <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-        <asp:TextBox runat="server" ID="txtZip" CssClass="form-control" placeholder="1060" required=""/>
-    </div>
-  </div>
+</div>
      <asp:Button Text="Save" ID="btnSubmit" CssClass="btn btn-lg btn btn-primary" runat="server" OnClick="btnSubmit_Click" />
     <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 </form>

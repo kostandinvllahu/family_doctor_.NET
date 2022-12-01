@@ -43,8 +43,8 @@ namespace doctor.view
                 };
 
 
-
-            if (Query.Update(obj))
+            string sql = "UPDATE login set fullname=@fullname, email=@email, password=@password, idcard=@idcard, address=@address, addresstwo=@addresstwo, phone=@phone, city=@city, state=@state, zipcode=@zipcode where username=@username";
+            if (Query.Update(obj, sql))
             {
                 lblError.Text = "Data updated successfully!";
                 GetValues();

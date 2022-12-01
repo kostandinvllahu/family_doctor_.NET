@@ -14,6 +14,7 @@ namespace doctor.view
 {
     public partial class signin : System.Web.UI.Page
     {
+        String sql = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             var con = Script.GetConnection();
@@ -50,28 +51,32 @@ namespace doctor.view
                 username = username,
                 doctor = doctor
             };
+            sql = "SELECT  * from login where (username=@username)";
+            var user = Query.VerifyEmail(users, sql);
 
-             var user = Query.VerifyEmail(users);
+            if (user != null)
+            {
+                lblError.Text = "Username is already in use, please choose another one";
+                return;
+            }
 
+            sql = "SELECT  * from login where (email=@email)";
+            user = Query.VerifyEmail(users, sql);
             if (user != null)
             {
                 lblError.Text = "Email is already registered login?";
                 return;
             }
-            user = Query.VerifyUsername(users);
-            if(user != null)
-            {
-                lblError.Text = "Username is taken please choose another one.";
-                return;
-            }
 
-            if (Query.Insert(users))
+            sql = "INSERT INTO login (fullname, email, username, password, doctor) VALUES (@fullname, @email, @username, @password, @doctor)";
+            if (Query.Insert(users, sql))
             {
                 lblError.Text = "Account created successfully!";
             }
             else
             {
                 lblError.Text = "Opss.. Something went wrong!";
+                return;
             }
             
         }

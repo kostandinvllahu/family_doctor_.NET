@@ -13,22 +13,22 @@ namespace doctor.view {
     public partial class checkup {
         
         /// <summary>
-        /// txtFullName control.
+        /// txtDoctorName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFullName;
+        protected global::System.Web.UI.WebControls.TextBox txtDoctorName;
         
         /// <summary>
-        /// txtIdCard control.
+        /// selectTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdCard;
+        protected global::System.Web.UI.WebControls.DropDownList selectTime;
         
         /// <summary>
         /// txtEmail control.
@@ -40,67 +40,31 @@ namespace doctor.view {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
-        /// txtPassword control.
+        /// selectService control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.DropDownList selectService;
         
         /// <summary>
-        /// txtAddress control.
+        /// txtComment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress;
+        protected global::System.Web.UI.WebControls.TextBox txtComment;
         
         /// <summary>
-        /// txtPhone control.
+        /// txtDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhone;
-        
-        /// <summary>
-        /// txtAddress2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress2;
-        
-        /// <summary>
-        /// txtCity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCity;
-        
-        /// <summary>
-        /// txtState control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtState;
-        
-        /// <summary>
-        /// txtZip control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtZip;
+        protected global::System.Web.UI.WebControls.Calendar txtDate;
         
         /// <summary>
         /// btnSubmit control.
