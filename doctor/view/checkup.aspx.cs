@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,9 +13,11 @@ namespace doctor.view
 {
     public partial class checkup : System.Web.UI.Page
     {
-        String sql = "";
+        string sql = "";
         Boolean check = false;
-       
+        string formatDate = "";
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -125,22 +128,24 @@ namespace doctor.view
 
                 if(selectDay > DateTime.Today)
                 {
-                    Global.Format_Date("SELECT [dbo].[ufn_GetDateOnly] ('03/12/2022 00:00:00') as date");
-                    //var appointments = new appointment()
-                    //{
-                    //    Date = txtDate.SelectedDate.ToString(),
-                    //    Time = selectTime.SelectedItem.Value
-                    //};
+                    //string formatDate =  Global.Format_Date("SELECT [dbo].[ufn_GetDateOnly] ('"+ selectDay + "') as date");
+                    formatDate = Global.Format_Date("select CONVERT(char(10), '" + selectDay + "',103) as date");
+                    var appointments = new appointment()
+                    {
+                        Date = formatDate,
+                        Time = selectTime.SelectedItem.Value,
+                        Doctoremail = txtEmail.Text.Trim()
+                    };
 
-                    //var book = Query.Check_Future_Appointments(appointments);
-                    //if (book != null)
-                    //{
-                    //    lblError.Text = "This time is already booked please choose another time";
-                    //    selectTime.Items.Clear();
-                    //    GetTime();
-                    //    EnableTime();
-                    //    check = false;
-                    //}
+                    var book = Query.Check_Future_Appointments(appointments);
+                    if (book != null)
+                    {
+                        lblError.Text = "This time is already booked please choose another time";
+                        selectTime.Items.Clear();
+                        GetTime();
+                        EnableTime();
+                        check = false;
+                    }
                 }
             } 
         }
@@ -148,36 +153,38 @@ namespace doctor.view
         private void GetTime()
         {
             Global.bindDropdown(selectTime, "select * from time where status='1' and doctor='" + txtEmail.Text.Trim() +"'", "time", "time");
-        } //ketu duhet me @email jo me tekst!
+        } 
 
         private void EnableTime()
         {
-            //01/12/2022 15:30:00
             if (Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) >= Convert.ToDateTime("16:00:00"))
             {
+                formatDate = Global.Format_Date("select CONVERT(char(10), '" + DateTime.Today.ToString() + "',103) as date");
                 var obj = new database.time
                 {
                     Status = "1",
-                    Date = DateTime.Today.ToString()
+                    Date = formatDate
                 };
 
                  sql = "UPDATE time set status=@Status where status=0";
                 Query.Update(obj, sql);
-                sql = "UPDATE appointments set status=0 where date=@Date"; //same date problem here
+                 
+                sql = "update appointments set status = '0' where date = @Date";
                 Query.Update(obj, sql);
             }
 
             if (Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) <= Convert.ToDateTime("08:00:00"))
             {
+                formatDate = Global.Format_Date("select CONVERT(char(10), '" + DateTime.Today.ToString() + "',103) as date");
                 var obj = new database.time
                 {
                     Status = "1",
-                     Date = DateTime.Today.ToString()
+                     Date = formatDate
                 };
                
                 sql = "UPDATE time set status=@Status where status=0";
                 Query.Update(obj, sql);
-                sql = "UPDATE appointments set status=0 where date=@Date"; //same date problem here
+                sql = "UPDATE appointments set status='0' where date=@Date"; 
                 Query.Update(obj, sql);
             }
         }

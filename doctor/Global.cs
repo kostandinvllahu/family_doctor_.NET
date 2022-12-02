@@ -27,8 +27,9 @@ namespace doctor
             ddl.DataBind();
         }
 
-        public static void Format_Date(string sql)
+        public static string Format_Date(string sql)
         {
+            string format = "";
             var con = Script.GetConnection();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
@@ -36,8 +37,12 @@ namespace doctor
             SqlDataReader rdr = cmd.ExecuteReader();
             if (rdr.HasRows)
             {
-                string test = rdr.GetOrdinal("date").ToString();
+                while (rdr.Read())
+                {
+                    format = rdr.GetString(0);
+                }
             }
+            return format;
         }
     }
 }
