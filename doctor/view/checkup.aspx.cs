@@ -17,14 +17,21 @@ namespace doctor.view
        
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["username"] == null)
+            if (!Page.IsPostBack)
             {
-                Response.Redirect("login.aspx");
-                return;
+                if (Session["username"] == null)
+                {
+                    Response.Redirect("login.aspx");
+                    return;
+                }
+                var Id = new database.Doctor()
+                {
+                    Id = Convert.ToInt32(Session["doctorId"])
+            };
+                GetValues(Id);
+                GetTime();
             }
             EnableTime();
-            GetValues();
-            Global.bindDropdown(selectTime, "select * from time where status='1'", "time", "time");
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -46,11 +53,12 @@ namespace doctor.view
                     " (@Doctorname, @Doctoremail, @Patientname, @Service, @Comment, @Time, @Date)";
                 if (Query.Insert(appointment, sql))
                 {
+                   
                     lblError.Text = "Appointment booked successfully!";
-                    sql = "update time set status=0 where time=@Time";
+                    sql = "update time set status=0 where time=@Time and doctor='"+txtEmail.Text.Trim()+"'";
                     Query.Update(appointment, sql);
                     selectTime.Items.Clear();
-                    Global.bindDropdown(selectTime, "select * from time where status='1'", "time", "time");
+                    GetTime();
                     EnableTime();
                     return; 
                 }
@@ -58,16 +66,17 @@ namespace doctor.view
                 {
                     lblError.Text = "Opss.. Something went wrong!";
                     selectTime.Items.Clear();
-                    Global.bindDropdown(selectTime, "select * from time where status='1'", "time", "time");
+                    GetTime();
                     EnableTime();
                     return;
                 }
             }
         }
 
-        private void GetValues()
+        private void GetValues(Doctor Id)
         {
-            var doctor = Query.FetchDoctor();
+            
+            var doctor = Query.FetchDoctor(Id);
             if (doctor != null)
             {
                 txtDoctorName.Text = doctor.fullname;
@@ -85,7 +94,7 @@ namespace doctor.view
             {
                 lblError.Text = "Today is Sunday we are closed please choose another day of the week!";
                 selectTime.Items.Clear();
-                Global.bindDropdown(selectTime, "select * from time where status='1'", "time", "time");
+                GetTime();
                 EnableTime();
                 check = false;
 
@@ -96,7 +105,7 @@ namespace doctor.view
                 {
                     lblError.Text = "This date has passed please choose different time!";
                     selectTime.Items.Clear();
-                    Global.bindDropdown(selectTime, "select * from time where status='1'", "time", "time");
+                    GetTime();
                     EnableTime();
                     check = false;
                 }
@@ -107,13 +116,18 @@ namespace doctor.view
                     {
                         lblError.Text = "This time has passed please choose different time!";
                         selectTime.Items.Clear();
-                        Global.bindDropdown(selectTime, "select * from time where status='1'", "time", "time");
+                        GetTime();
                         EnableTime();
                         check = false;
                     }
                 }
             } 
         }
+
+        private void GetTime()
+        {
+            Global.bindDropdown(selectTime, "select * from time where status='1' and doctor='" + txtEmail.Text.Trim() +"'", "time", "time");
+        } //ketu duhet me @email jo me tekst!
 
         private void EnableTime()
         {
@@ -141,6 +155,9 @@ namespace doctor.view
             }
         }
 
-
+        protected void txtDate_SelectionChanged(object sender, EventArgs e)
+        {
+           // lblError.Text = "WOW";
+        }
     }
 }

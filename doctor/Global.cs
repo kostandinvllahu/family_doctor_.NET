@@ -13,6 +13,7 @@ namespace doctor
 {
     public static class Global
     {
+        
         public static void bindDropdown(DropDownList ddl, string sql, string fieldText, string fieldValue)
         {
             var con = Script.GetConnection();

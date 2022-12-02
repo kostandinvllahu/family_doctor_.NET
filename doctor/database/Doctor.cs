@@ -7,7 +7,7 @@ namespace doctor.database
 {
     public class Doctor
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         public string fullname { get; set; }
 

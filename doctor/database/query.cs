@@ -35,12 +35,12 @@ namespace doctor.database
             }
         }
 
-        public static Doctor FetchDoctor()
+        public static Doctor FetchDoctor(Doctor id)
         {
-            string sqlQuery = "SELECT * from doctor";
+            string sqlQuery = "SELECT * from doctor where (Id=@id) "; 
             using (var con = Script.GetConnection())
             {
-                return con.Query<Doctor>(sqlQuery).FirstOrDefault();
+                return con.Query<Doctor>(sqlQuery, id).FirstOrDefault();
             }
         } 
 

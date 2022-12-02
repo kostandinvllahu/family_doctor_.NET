@@ -26,6 +26,7 @@ namespace doctor.view
             {
                 username = username,
                 password = password
+
             };
 
             var user = Query.Login(obj);
@@ -33,6 +34,7 @@ namespace doctor.view
             {
                 Session["username"] = txtusername.Text;
                 Session["password"] = txtpassword.Text;
+                Session["doctorId"] = user.doctor;
                 Response.Redirect("main.aspx");
             }
             else

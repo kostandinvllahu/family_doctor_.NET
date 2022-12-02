@@ -13,5 +13,7 @@ namespace doctor.database
       public string Time { get; set; }
       
       public string Status { get; set; } 
+
+      public string Doctor { get; set; }
     }
 }

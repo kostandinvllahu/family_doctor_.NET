@@ -43,7 +43,7 @@
 
       <div class="form-group col-md-6">
       <label for="inputPassword4">Date</label>
-        <asp:Calendar runat="server" ID="txtDate" CssClass="form-control" placeholder="Date"></asp:Calendar>
+        <asp:Calendar runat="server" ID="txtDate" CssClass="form-control" placeholder="Date" OnClick="txtDate_Click" OnSelectionChanged="txtDate_SelectionChanged"></asp:Calendar>
     </div>
 </div>
      <asp:Button Text="Save" ID="btnSubmit" CssClass="btn btn-lg btn btn-primary" runat="server" OnClick="btnSubmit_Click" />
