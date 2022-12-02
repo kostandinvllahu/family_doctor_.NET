@@ -44,6 +44,24 @@ namespace doctor.database
             }
         } 
 
+        public static time GetTimeFormat(Object date) 
+        {
+            string sql = "SELECT [dbo].[ufn_GetDateOnly] (@date)";
+            using (var con = Script.GetConnection())
+            {
+                return con.Query<time>(sql, date).FirstOrDefault();
+            }
+        }
+
+        public static appointment Check_Future_Appointments(appointment book)
+        {
+           string sql = "select * from appointments where date=@Date and time=@Time";
+            using (var con = Script.GetConnection())
+            {
+                return con.Query<appointment>(sql, book).FirstOrDefault(); 
+            }
+        }
+
         public static bool Update(Object user, String sql)
         {
             using (var con = Script.GetConnection())

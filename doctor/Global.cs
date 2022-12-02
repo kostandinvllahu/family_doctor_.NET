@@ -26,5 +26,18 @@ namespace doctor
             ddl.DataValueField = fieldValue;
             ddl.DataBind();
         }
+
+        public static void Format_Date(string sql)
+        {
+            var con = Script.GetConnection();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = sql;
+            SqlDataReader rdr = cmd.ExecuteReader();
+            if (rdr.HasRows)
+            {
+                string test = rdr.GetOrdinal("date").ToString();
+            }
+        }
     }
 }

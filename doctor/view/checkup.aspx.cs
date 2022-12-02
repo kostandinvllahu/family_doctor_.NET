@@ -30,6 +30,7 @@ namespace doctor.view
             };
                 GetValues(Id);
                 GetTime();
+                //EnableTime();
             }
             EnableTime();
         }
@@ -41,7 +42,7 @@ namespace doctor.view
                 Doctorname = txtDoctorName.Text.Trim(),
                 Doctoremail = txtEmail.Text.Trim(),
                 Patientname = Session["username"].ToString(),
-                Service = selectService.SelectedItem.Value,
+                Service = selectService.SelectedItem.Text,
                 Comment = txtComment.Text.Trim(),
                 Time = selectTime.SelectedItem.Value,
                 Date = txtDate.SelectedDate.ToShortDateString()
@@ -49,8 +50,8 @@ namespace doctor.view
             CheckTime(Convert.ToDateTime(selectTime.SelectedItem.Value), Convert.ToDateTime(txtDate.SelectedDate.ToShortDateString()), txtDate.SelectedDate.DayOfWeek.ToString());
             if (check)
             {
-                sql = "INSERT INTO appointments (doctorname, doctoremail, patientname, service, comment, time, date) VALUES" +
-                    " (@Doctorname, @Doctoremail, @Patientname, @Service, @Comment, @Time, @Date)";
+                sql = "INSERT INTO appointments (doctorname, doctoremail, patientname, service, comment, time, date, status) VALUES" +
+                    " (@Doctorname, @Doctoremail, @Patientname, @Service, @Comment, @Time, @Date, 1)";
                 if (Query.Insert(appointment, sql))
                 {
                    
@@ -121,6 +122,26 @@ namespace doctor.view
                         check = false;
                     }
                 }
+
+                if(selectDay > DateTime.Today)
+                {
+                    Global.Format_Date("SELECT [dbo].[ufn_GetDateOnly] ('03/12/2022 00:00:00') as date");
+                    //var appointments = new appointment()
+                    //{
+                    //    Date = txtDate.SelectedDate.ToString(),
+                    //    Time = selectTime.SelectedItem.Value
+                    //};
+
+                    //var book = Query.Check_Future_Appointments(appointments);
+                    //if (book != null)
+                    //{
+                    //    lblError.Text = "This time is already booked please choose another time";
+                    //    selectTime.Items.Clear();
+                    //    GetTime();
+                    //    EnableTime();
+                    //    check = false;
+                    //}
+                }
             } 
         }
 
@@ -132,32 +153,54 @@ namespace doctor.view
         private void EnableTime()
         {
             //01/12/2022 15:30:00
-            if (Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) == Convert.ToDateTime("01/12/2022 16:00:00"))
+            if (Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) >= Convert.ToDateTime("16:00:00"))
             {
                 var obj = new database.time
                 {
-                    Status = "1"
+                    Status = "1",
+                    Date = DateTime.Today.ToString()
                 };
 
                  sql = "UPDATE time set status=@Status where status=0";
                 Query.Update(obj, sql);
+                sql = "UPDATE appointments set status=0 where date=@Date"; //same date problem here
+                Query.Update(obj, sql);
             }
 
-            if (Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) == Convert.ToDateTime("01/12/2022 08:00:00"))
+            if (Convert.ToDateTime(System.DateTime.Now.ToString("HH:mm")) <= Convert.ToDateTime("08:00:00"))
             {
                 var obj = new database.time
                 {
-                    Status = "1"
+                    Status = "1",
+                     Date = DateTime.Today.ToString()
                 };
                
                 sql = "UPDATE time set status=@Status where status=0";
+                Query.Update(obj, sql);
+                sql = "UPDATE appointments set status=0 where date=@Date"; //same date problem here
                 Query.Update(obj, sql);
             }
         }
 
         protected void txtDate_SelectionChanged(object sender, EventArgs e)
         {
-           // lblError.Text = "WOW";
+            if (Convert.ToDateTime(txtDate.SelectedDate.ToShortDateString()) > DateTime.Today)
+            {
+                selectTime.Items.Clear();
+                Global.bindDropdown(selectTime, "select * from future_booking", "time", "time");
+                EnableTime();
+                check = false;
+            }
+            else
+            {
+                selectTime.Items.Clear();
+                GetTime();
+            }
+        }
+
+        private void time_format(Object date)
+        {
+            
         }
     }
 }

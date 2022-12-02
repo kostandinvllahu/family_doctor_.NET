@@ -15,5 +15,7 @@ namespace doctor.database
       public string Status { get; set; } 
 
       public string Doctor { get; set; }
+        
+      public string Date { get; set; }
     }
 }
