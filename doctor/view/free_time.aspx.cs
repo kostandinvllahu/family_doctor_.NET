@@ -1,9 +1,11 @@
 ﻿using doctor.database;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace doctor.view
@@ -27,16 +29,14 @@ namespace doctor.view
                     Id = Convert.ToInt32(Session["doctorId"])
                 };
                 EnableTime();
-                GetAppointments();
-                //GetValues(Id);
-                // GetTime();
+                GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "'");
             }
             EnableTime();
         }
 
-        private void GetAppointments()
+        private void GetAppointments(string sql)
         {
-            Global.FillGrid(gvList, "select * from appointments where patientname='"+ Session["username"].ToString() + "'");
+            Global.FillGrid(gvList, sql);
         }
 
         private void EnableTime()
@@ -71,6 +71,62 @@ namespace doctor.view
                 sql = "UPDATE appointments set status='0' where date=@Date";
                 Query.Update(obj, sql);
             }
+        }
+
+        protected void selectFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (!txtSearch.Text.Equals(""))
+            {
+                GetAppointments("select * from appointments where concat(Id, service, comment, time, date) Like '%" + txtSearch.Text + "%'");
+            }
+            else
+            {
+                formatDate = Global.Format_Date("select CONVERT(char(10), '" + DateTime.Today.ToString() + "',103) as date");
+                switch (selectFilter.SelectedValue.ToString())
+                {
+                    case "1":
+                        GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "'");
+                        break;
+                    case "2":
+                        GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "' and date > '" + formatDate + "'");
+                        break;
+                    case "3":
+                        GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "' and date <'" + formatDate + "'");
+                        break;
+                    case "4":
+                        GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "' and date = '" + formatDate + "'");
+                        break;
+                }
+            }
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnDownload_Click(object sender, EventArgs e)
+        {
+            string attachment = "attachment; filename=Appointments"+formatDate+".xls";
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", attachment);
+            Response.ContentType = "application/ms-excel";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            // Create a form to contain the grid
+            HtmlForm frm = new HtmlForm();
+            gvList.Parent.Controls.Add(frm);
+            frm.Attributes["runat"] = "server";
+            frm.Controls.Add(gvList);
+            frm.RenderControl(htw);
+            //GridView1.RenderControl(htw);
+            Response.Write(sw.ToString());
+            Response.End();
         }
     }
 }

@@ -9,7 +9,11 @@
 <body>
     <form id="form1" runat="server">
         <div class="form-row">
-          <div class="form-group ">
+         <div class="form-group col-md-6">
+  	     <label for="inputEmail4">Dynamic search (Search by ID, Service, Comment, Time, Date)</label>
+          <asp:TextBox runat="server" ID="txtSearch" CssClass="form-control" placeholder="Search" OnTextChanged="txtSearch_TextChanged"/>
+         </div>
+          <div class="form-group">
           <asp:GridView runat="server" ID="gvList" CssClass="thead-dark" Width="100%" AutoGenerateColumns="false">
               <Columns>
                   <asp:BoundField DataField="Id" HeaderText="User ID" />
@@ -27,17 +31,17 @@
 
          <div class="form-group col-md-6">
          <label for="inputPassword4">Filter</label>
-       <asp:DropDownList runat="server" ID="selectService" CssClass="form-control" AppendDataBoundItems="true">
-           <asp:ListItem Enabled="true" Text= "Blood Analysis" Value= "1"></asp:ListItem>
-           <asp:ListItem Enabled="true" Text= "Stress Test" Value= "2"></asp:ListItem>
-           <asp:ListItem Enabled="true" Text= "Tension Holter" Value= "3"></asp:ListItem>
-           <asp:ListItem Enabled="true" Text= "Rythm Holter" Value= "4"></asp:ListItem>
-           <asp:ListItem Enabled="true" Text= "Testicular Echo" Value= "5"></asp:ListItem>
-           <asp:ListItem Enabled="true" Text= "Breast Echography" Value= "6"></asp:ListItem>
+       <asp:DropDownList runat="server" ID="selectFilter" CssClass="form-control" AppendDataBoundItems="true" OnSelectedIndexChanged="selectFilter_SelectedIndexChanged">
+           <asp:ListItem Enabled="true" Text= "All Appointments" Value= "1"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Future Appointments" Value= "2"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Past Appointments" Value= "3"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Todays Appointments" Value= "4"></asp:ListItem>
         </asp:DropDownList>
            </div>
-            <!--class="thead-dark"-->
         </div>
+         <asp:Button Text="Search" ID="btnSubmit" CssClass="btn btn-lg btn btn-primary" runat="server" OnClick="btnSubmit_Click" />
+         <asp:Button Text="Download Values" ID="btnDownload" CssClass="btn btn-lg btn btn-primary" runat="server" OnClick="btnDownload_Click" />
+         <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
     </form>
 </body>
 </html>
