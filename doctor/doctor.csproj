@@ -108,9 +108,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="view\checkup.aspx" />
+    <Content Include="view\covid.aspx" />
     <Content Include="view\css\main.css" />
     <Content Include="view\css\navbar.css" />
     <Content Include="view\css\signin.css" />
+    <Content Include="view\drugs.aspx" />
     <Content Include="view\images\checkup.png" />
     <Content Include="view\images\covid.png" />
     <Content Include="view\images\disabled.png" />
@@ -139,6 +141,20 @@
     </Compile>
     <Compile Include="view\checkup.aspx.designer.cs">
       <DependentUpon>checkup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\covid.aspx.cs">
+      <DependentUpon>covid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\covid.aspx.designer.cs">
+      <DependentUpon>covid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\drugs.aspx.cs">
+      <DependentUpon>drugs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\drugs.aspx.designer.cs">
+      <DependentUpon>drugs.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
