@@ -119,8 +119,8 @@ namespace doctor.view
                         Time = selectTime.SelectedItem.Value,
                         Doctoremail = txtEmail.Text.Trim()
                     };
-
-                    var book = Query.Check_Future_Appointments(appointments);
+                    sql = "select * from appointments where date=@Date and time=@Time  and doctoremail=@Doctoremail";
+                    var book = Query.Check_Future_Appointments(appointments, sql);
                     if (book != null)
                     {
                         lblError.Text = "This time is already booked please choose another time";

@@ -21,7 +21,7 @@
 	</div>
 	<div class="box">
 	<img src="images/retired.png"></img>
-	<a href=".../../free_time.aspx"><p>Prescriptions for the retired</p></a>
+	<a href=".../../free_time.aspx"><p>Free appointments</p></a>
 	</div>
 	<div class="box">
 	<img src="images/covid.png"></img>
@@ -33,7 +33,7 @@
 	</div>
 	<div class="box">
 	<img src="images/disabled.png"></img>
-	<a href=".../../appointments.aspx"><p>Prescription for the disabled</p></a>
+	<a href=".../../appointments.aspx"><p>Total appointments</p></a>
 	</div>
 	</div>
 	</body>

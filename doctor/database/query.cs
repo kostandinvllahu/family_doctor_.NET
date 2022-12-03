@@ -53,9 +53,9 @@ namespace doctor.database
             }
         }
 
-        public static appointment Check_Future_Appointments(appointment book)
+        public static appointment Check_Future_Appointments(appointment book, String sql)
         {
-           string sql = "select * from appointments where date=@Date and time=@Time  and doctoremail=@Doctoremail";
+          
             using (var con = Script.GetConnection())
             {
                 return con.Query<appointment>(sql, book).FirstOrDefault(); 

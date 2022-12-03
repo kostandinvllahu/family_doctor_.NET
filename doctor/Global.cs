@@ -27,6 +27,16 @@ namespace doctor
             ddl.DataBind();
         }
 
+        public static void FillGrid(GridView dtg, string sql)
+        {
+            var con = Script.GetConnection();
+            SqlDataAdapter sda = new SqlDataAdapter(sql, con);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            dtg.DataSource = dt;
+            dtg.DataBind();
+        }
+
         public static string Format_Date(string sql)
         {
             string format = "";
