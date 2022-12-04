@@ -75,7 +75,7 @@ namespace doctor.view
 
         protected void selectFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -101,18 +101,27 @@ namespace doctor.view
                     case "4":
                         GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "' and date = '" + formatDate + "'");
                         break;
+                    case "5":
+                        DateInterval(txtDate.SelectedDate.ToShortDateString(), txtEnd.SelectedDate.ToShortDateString());
+                        break;
                 }
             }
         }
 
         protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void btnDownload_Click(object sender, EventArgs e)
         {
-            string attachment = "attachment; filename=Appointments"+formatDate+".xls";
+            lblError.Text = "";
+            if (gvList.Rows.Count == 0)
+            {
+                lblError.Text = "There are no appointments to be downloaded please try again.";
+                return;
+            }
+            string attachment = "attachment; filename=Appointments" + formatDate + ".xls";
             Response.ClearContent();
             Response.AddHeader("content-disposition", attachment);
             Response.ContentType = "application/ms-excel";
@@ -127,6 +136,27 @@ namespace doctor.view
             //GridView1.RenderControl(htw);
             Response.Write(sw.ToString());
             Response.End();
+            lblError.Text = "Appointments downloaded successfully!";
         }
-    }
-}
+
+        protected void txtDate_SelectionChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void txtEnd_SelectionChanged(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void DateInterval(string startDate, string endDate)
+        {
+            var filterDate = new database.appointment()
+            {
+                Date = startDate,
+                EndDate = endDate
+            };
+            GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "' and date between '" + startDate + "' and '"+ endDate+"'");
+        }
+      }
+   }

@@ -36,9 +36,21 @@
            <asp:ListItem Enabled="true" Text= "Future Appointments" Value= "2"></asp:ListItem>
            <asp:ListItem Enabled="true" Text= "Past Appointments" Value= "3"></asp:ListItem>
            <asp:ListItem Enabled="true" Text= "Todays Appointments" Value= "4"></asp:ListItem>
+           <asp:ListItem Enabled="true" Text= "Date Interval" Value= "5"></asp:ListItem>
         </asp:DropDownList>
            </div>
+       <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="inputPassword4">Starting Date</label>
+        <asp:Calendar runat="server" ID="txtDate" CssClass="form-control" placeholder="Date" OnClick="txtDate_Click" OnSelectionChanged="txtDate_SelectionChanged"></asp:Calendar>
         </div>
+       
+        <div class="form-group col-md-6">
+        <label for="inputPassword4">Ending Date</label>
+        <asp:Calendar runat="server" ID="txtEnd" CssClass="form-control" placeholder="Date" OnClick="txtDate_Click" OnSelectionChanged="txtEnd_SelectionChanged"></asp:Calendar>
+        </div>
+        </div>
+            </div>
          <asp:Button Text="Search" ID="btnSubmit" CssClass="btn btn-lg btn btn-primary" runat="server" OnClick="btnSubmit_Click" />
          <asp:Button Text="Download Values" ID="btnDownload" CssClass="btn btn-lg btn btn-primary" runat="server" OnClick="btnDownload_Click" />
          <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />

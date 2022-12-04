@@ -30,7 +30,7 @@ namespace doctor.view
                 var Id = new database.Doctor()
                 {
                     Id = Convert.ToInt32(Session["doctorId"])
-            };
+                };
                 GetValues(Id);
                 GetTime();
                 //EnableTime();
@@ -49,7 +49,7 @@ namespace doctor.view
                 Comment = txtComment.Text.Trim(),
                 Time = selectTime.SelectedItem.Value,
                 Date = txtDate.SelectedDate.ToShortDateString()
-        };
+            };
             CheckTime(Convert.ToDateTime(selectTime.SelectedItem.Value), Convert.ToDateTime(txtDate.SelectedDate.ToShortDateString()), txtDate.SelectedDate.DayOfWeek.ToString());
             if (check)
             {
@@ -57,14 +57,14 @@ namespace doctor.view
                     " (@Doctorname, @Doctoremail, @Patientname, @Service, @Comment, @Time, @Date, 1)";
                 if (Query.Insert(appointment, sql))
                 {
-                   
+
                     lblError.Text = "Appointment booked successfully!";
-                    sql = "update time set status=0 where time=@Time and doctor='"+txtEmail.Text.Trim()+"'";
+                    sql = "update time set status=0 where time=@Time and doctor='" + txtEmail.Text.Trim() + "'";
                     Query.Update(appointment, sql);
                     selectTime.Items.Clear();
                     GetTime();
                     EnableTime();
-                    return; 
+                    return;
                 }
                 else
                 {
@@ -79,7 +79,7 @@ namespace doctor.view
 
         private void GetValues(Doctor Id)
         {
-            
+
             var doctor = Query.FetchDoctor(Id);
             if (doctor != null)
             {
@@ -92,7 +92,7 @@ namespace doctor.view
         }
 
         private void CheckTime(DateTime selectedTime, DateTime selectDay, String weekname)
-         {
+        {
             check = true;
             if (weekname.Equals("Sunday"))
             {
@@ -126,7 +126,7 @@ namespace doctor.view
                     }
                 }
 
-                if(selectDay > DateTime.Today)
+                if (selectDay > DateTime.Today)
                 {
                     //string formatDate =  Global.Format_Date("SELECT [dbo].[ufn_GetDateOnly] ('"+ selectDay + "') as date");
                     formatDate = Global.Format_Date("select CONVERT(char(10), '" + selectDay + "',103) as date");
@@ -147,13 +147,13 @@ namespace doctor.view
                         check = false;
                     }
                 }
-            } 
+            }
         }
 
         private void GetTime()
         {
-            Global.bindDropdown(selectTime, "select * from time where status='1' and doctor='" + txtEmail.Text.Trim() +"'", "time", "time");
-        } 
+            Global.bindDropdown(selectTime, "select * from time where status='1' and doctor='" + txtEmail.Text.Trim() + "'", "time", "time");
+        }
 
         private void EnableTime()
         {
@@ -166,9 +166,9 @@ namespace doctor.view
                     Date = formatDate
                 };
 
-                 sql = "UPDATE time set status=@Status where status=0";
+                sql = "UPDATE time set status=@Status where status=0";
                 Query.Update(obj, sql);
-                 
+
                 sql = "update appointments set status = '0' where date = @Date";
                 Query.Update(obj, sql);
             }
@@ -179,12 +179,12 @@ namespace doctor.view
                 var obj = new database.time
                 {
                     Status = "1",
-                     Date = formatDate
+                    Date = formatDate
                 };
-               
+
                 sql = "UPDATE time set status=@Status where status=0";
                 Query.Update(obj, sql);
-                sql = "UPDATE appointments set status='0' where date=@Date"; 
+                sql = "UPDATE appointments set status='0' where date=@Date";
                 Query.Update(obj, sql);
             }
         }
@@ -207,7 +207,7 @@ namespace doctor.view
 
         private void time_format(Object date)
         {
-            
+
         }
     }
 }
