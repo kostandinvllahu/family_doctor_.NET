@@ -34,8 +34,9 @@ namespace doctor.view
                 GetValues(Id);
                 formatDate = Global.Format_Date("select CONVERT(char(10), '" + DateTime.Today.ToString() + "',103) as date");
                 Global.Check_Appointments(txtEmail.Text.Trim(), formatDate);
+                selectTime.Items.Clear();
                 GetTime();
-                //EnableTime();
+                EnableTime();
             }
             EnableTime();
         }

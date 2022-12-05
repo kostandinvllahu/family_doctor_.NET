@@ -10,7 +10,7 @@
   </div>
    <div class="form-group col-md-6">
   	<label for="inputPassword4">ID Card Number</label>
-       <asp:TextBox runat="server" ID="txtIdCard" CssClass="form-control" placeholder="ID Card Number" required=""/>
+       <asp:TextBox runat="server" ID="txtIdCard" CssClass="form-control" placeholder="ID Card Number" required="" OnTextChanged="txtIdCard_TextChanged"/>
   </div>
     <div class="form-group col-md-6">	
       <label for="inputEmail4">Email</label>

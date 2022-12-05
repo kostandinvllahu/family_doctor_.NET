@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -30,6 +31,13 @@ namespace doctor.view
         {
             // lblError.Text = "";
 
+            Regex regex = new Regex(@"/^[A-Z]{1}[0-9]{8}[A-Z]{1}$/gm");
+            var maches = regex.Matches("J12345678D");
+            if (maches.Count == 0)
+            {
+                lblError.Text = "ID Card must start with 1 capital letter, contain 8 digits and end with another 1 capital letter!";
+                return;
+            }
 
             var obj = new database.Users
             {
@@ -82,6 +90,11 @@ namespace doctor.view
                 txtState.Text = user.state;
                 txtZip.Text = user.zipcode;
             }
+        }
+
+        protected void txtIdCard_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -65,7 +65,7 @@ namespace doctor
             SqlDataReader rdr = cmd.ExecuteReader();
             con.Close();
             con.Open();
-            sql = "update time set status = '0' where doctor = '"+ doctorEmail + "' and time IN(select time from appointments where date = '"+ date + "' and doctoremail = '"+ doctorEmail + "')";
+            sql = "update time set status = '0' where doctor = '"+ doctorEmail + "' and time IN(select time from appointments where date = '"+ date + "' and doctoremail = '"+ doctorEmail + "' and status='1')";
              cmd = new SqlCommand(sql, con);
              rdr = cmd.ExecuteReader();
         }
