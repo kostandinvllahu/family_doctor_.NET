@@ -10,7 +10,7 @@ namespace doctor.database
     {
         public static Users Login(Users obj)
         {
-            string sqlQuery = "SELECT * from login where (username=@username) and (password=@password)";
+            string sqlQuery = "SELECT * from login where username=@username COLLATE SQL_Latin1_general_CP1_CS_AS and password=@password COLLATE SQL_Latin1_general_CP1_CS_AS";
 
             using (var con = Script.GetConnection())
             {

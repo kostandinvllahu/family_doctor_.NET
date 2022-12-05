@@ -31,9 +31,9 @@ namespace doctor.view
         {
             // lblError.Text = "";
 
-            Regex regex = new Regex(@"/^[A-Z]{1}[0-9]{8}[A-Z]{1}$/gm");
-            var maches = regex.Matches("J12345678D");
-            if (maches.Count == 0)
+            string pattern = @"^[A-Z]{1}[0-9]{8}[A-Z]{1}$";
+            var maches = Regex.Match(txtIdCard.Text.ToString(), pattern, RegexOptions.IgnoreCase);
+            if (!maches.Success)
             {
                 lblError.Text = "ID Card must start with 1 capital letter, contain 8 digits and end with another 1 capital letter!";
                 return;

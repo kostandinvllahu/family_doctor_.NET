@@ -28,6 +28,13 @@ namespace doctor.view
                 lblError.Text = "Your password must be more then 8 characters long";
                 return;
             }
+         
+            if (!txtPassword.Text.Any(char.IsUpper))
+            { 
+            lblError.Text = "Your password must contain one upper case character";
+            return;
+            }
+
 
             var username = txtUsername.Text.Trim();
             var email = txtEmail.Text.Trim();
