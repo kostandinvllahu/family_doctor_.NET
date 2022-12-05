@@ -28,6 +28,8 @@ namespace doctor.view
                     Id = Convert.ToInt32(Session["doctorId"])
                 };
                 GetValues(Id);
+                formatDate = Global.Format_Date("select CONVERT(char(10), '" + DateTime.Today.ToString() + "',103) as date");
+                Global.Check_Appointments(txtEmail.Text.Trim(), formatDate);
                 GetTime();
                 //EnableTime();
             }
@@ -191,7 +193,9 @@ namespace doctor.view
             if (Convert.ToDateTime(txtDate.SelectedDate.ToShortDateString()) > DateTime.Today)
             {
                 selectTime.Items.Clear();
-                Global.bindDropdown(selectTime, "select * from future_booking", "time", "time");
+                formatDate = Global.Format_Date("select CONVERT(char(10), '" + txtDate.SelectedDate.ToShortDateString() + "',103) as date");
+                Global.Check_Appointments(txtEmail.Text.Trim(), formatDate);
+                GetTime();
                 EnableTime();
                 check = false;
             }
