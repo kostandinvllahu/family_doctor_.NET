@@ -16,6 +16,7 @@ namespace doctor.database
             var con = new SqlConnection(ConnectionString);
             con.Open();
             return con;
+            
         }
     }
 }

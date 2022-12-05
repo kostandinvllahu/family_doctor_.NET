@@ -41,9 +41,11 @@ namespace doctor
         {
             string format = "";
             var con = Script.GetConnection();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-            cmd.CommandText = sql;
+            SqlCommand cmd = new SqlCommand
+            {
+                Connection = con,
+                CommandText = sql
+            };
             SqlDataReader rdr = cmd.ExecuteReader();
             if (rdr.HasRows)
             {
@@ -53,6 +55,19 @@ namespace doctor
                 }
             }
             return format;
+        }
+
+        public static void Check_Appointments(string doctorEmail, string date) 
+        {
+            string sql = "update time set status='1' where doctor='" + doctorEmail + "'";
+            var con = Script.GetConnection();
+            SqlCommand cmd = new SqlCommand(sql, con);
+            SqlDataReader rdr = cmd.ExecuteReader();
+            con.Close();
+            con.Open();
+            sql = "update time set status = '0' where doctor = '"+ doctorEmail + "' and time IN(select time from appointments where date = '"+ date + "' and doctoremail = '"+ doctorEmail + "')";
+             cmd = new SqlCommand(sql, con);
+             rdr = cmd.ExecuteReader();
         }
     }
 }

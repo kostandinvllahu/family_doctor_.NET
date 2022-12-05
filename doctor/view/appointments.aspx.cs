@@ -1,9 +1,11 @@
 ﻿using doctor.database;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace doctor.view
@@ -29,10 +31,16 @@ namespace doctor.view
                 GetValues(Id);
                 //GetTime();
                 EnableTime();
-                //Ketu ka error!
-                GetAppointments("select appointments.date, appointments.time from appointments left join future_bookingon on appointments.time = future_booking.time where appointments.doctoremail = '"+doctorEmail+"' and appointments.date = '05/12/2022' and appointments.status = 1");
+                formatDate = Global.Format_Date("select CONVERT(char(10), '" + DateTime.Today.ToString() + "',103) as date");
+                Global.Check_Appointments(doctorEmail, formatDate);
+                Global.FillGrid(gvList, "select time, doctor from time where status='1' and doctor='"+doctorEmail+"'");
             }
-            //EnableTime();
+             var id = new database.Doctor()
+            {
+                Id = Convert.ToInt32(Session["doctorId"]),
+            };
+            GetValues(id);
+            EnableTime();
         }
 
         private void EnableTime()
@@ -71,7 +79,7 @@ namespace doctor.view
 
         private void GetAppointments(string sql)
         {
-            Global.FillGrid(gvList, sql);
+           
         }
 
         private void GetValues(Doctor Id)
@@ -82,6 +90,43 @@ namespace doctor.view
             {
                 doctorEmail = doctor.email;
             }
+        }
+
+        protected void txtDate_SelectionChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            Global.Check_Appointments(doctorEmail, txtDate.SelectedDate.ToShortDateString());
+            Global.FillGrid(gvList, "select time, doctor from time where status='1' and doctor='" + doctorEmail + "'");
+        }
+
+        protected void btnDownload_Click(object sender, EventArgs e)
+        {
+            lblError.Text = "";
+            if (gvList.Rows.Count == 0)
+            {
+                lblError.Text = "There are no values to be downloaded please try again.";
+                return;
+            }
+            string attachment = "attachment; filename=DoctorFreeTime" + formatDate + ".xls";
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", attachment);
+            Response.ContentType = "application/ms-excel";
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            // Create a form to contain the grid
+            HtmlForm frm = new HtmlForm();
+            gvList.Parent.Controls.Add(frm);
+            frm.Attributes["runat"] = "server";
+            frm.Controls.Add(gvList);
+            frm.RenderControl(htw);
+            //GridView1.RenderControl(htw);
+            Response.Write(sw.ToString());
+            Response.End();
+            lblError.Text = "Doctor free time downloaded successfully!";
         }
     }
 }
