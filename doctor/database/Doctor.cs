@@ -16,5 +16,19 @@ namespace doctor.database
         public string username { get; set; }
 
         public string password { get; set; }
+
+        public string idcard { get; set; }
+
+        public string address { get; set; }
+
+        public string addresstwo { get; set; }
+
+        public string phone { get; set; }
+
+        public string city { get; set; }
+
+        public string state { get; set; }
+
+        public string zipcode { get; set; }
     }
 }

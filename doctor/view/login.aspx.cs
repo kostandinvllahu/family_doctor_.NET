@@ -29,19 +29,48 @@ namespace doctor.view
 
             };
 
-            var user = Query.Login(obj);
-            if(user != null)
+            if (ckbDoc.Checked == false)
             {
-                Session["username"] = txtusername.Text;
-                Session["password"] = txtpassword.Text;
-                Session["doctorId"] = user.doctor;
-                Response.Redirect("main.aspx");
+                var user = Query.Login(obj);
+                if (user != null)
+                {
+                    Session["username"] = txtusername.Text;
+                    Session["password"] = txtpassword.Text;
+                    Session["doctorId"] = user.doctor;
+                    Response.Redirect("main.aspx");
+                }
+                else
+                {
+                    lblError.Text = "Wrong username/password";
+                    return;
+                }
             }
             else
             {
-                lblError.Text = "Wrong username/password";
+                var doc = new Doctor()
+                {
+                    username = username,
+                    password = password
+                };
+                var doctor = Query.LoginDoc(doc);
+                if(doctor != null)
+                {
+                    Session["username"] = txtusername.Text;
+                    Session["password"] = txtpassword.Text;
+                    Session["doctorEmail"] = doc.email;
+                    Response.Redirect("doctor.aspx");
+                }
+                else
+                {
+                    lblError.Text = "Wrong username/password";
+                    return;
+                }
             }
         }
 
+        protected void ckbDoc_CheckedChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

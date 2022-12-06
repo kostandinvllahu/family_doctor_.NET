@@ -113,6 +113,7 @@
     <Content Include="view\css\main.css" />
     <Content Include="view\css\navbar.css" />
     <Content Include="view\css\signin.css" />
+    <Content Include="view\doctor.aspx" />
     <Content Include="view\drugs.aspx" />
     <Content Include="view\flu.aspx" />
     <Content Include="view\free_time.aspx" />
@@ -158,6 +159,13 @@
     </Compile>
     <Compile Include="view\covid.aspx.designer.cs">
       <DependentUpon>covid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\doctor.aspx.cs">
+      <DependentUpon>doctor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view\doctor.aspx.designer.cs">
+      <DependentUpon>doctor.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\drugs.aspx.cs">
       <DependentUpon>drugs.aspx</DependentUpon>

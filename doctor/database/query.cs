@@ -17,6 +17,15 @@ namespace doctor.database
                 return con.Query <Users>(sqlQuery, obj).FirstOrDefault();
             }
         }
+
+        public static Doctor LoginDoc(Doctor doctor)
+        {
+            string sql = "SELECT * from doctor where username=@username COLLATE SQL_Latin1_general_CP1_CS_AS and password=@password COLLATE SQL_Latin1_general_CP1_CS_AS";
+            using(var con = Script.GetConnection())
+            {
+                return con.Query<Doctor>(sql, doctor).FirstOrDefault();
+            }
+        }
         
         public static Users VerifyEmail(Object obj, String sql)
         {

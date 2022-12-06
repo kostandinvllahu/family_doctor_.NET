@@ -25,6 +25,7 @@
      <asp:TextBox runat="server" ID="txtpassword" TextMode="Password" CssClass="form-control" placeholder="Password" required="" autofocus=""/>
     <asp:Button Text="Login" ID="btnLogin" CssClass="btn btn-lg btn btn-primary btn-block" runat="server" OnClick="btnLogin_Click" />
 	<p class="text">Dont have an account? <a href=".../../signin.aspx">Register</a></p>	
+    <asp:Checkbox runat="server" ID="ckbDoc" Text="Login as doctor" OnCheckedChanged="ckbDoc_CheckedChanged" OnClick="ckbDoc_Click"></asp:Checkbox>
 	<p class="text"><a href="#">Forgot Password</a></p><br />
          <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 	</form>
