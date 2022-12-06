@@ -190,21 +190,13 @@ namespace doctor.view
 
         protected void txtDate_SelectionChanged(object sender, EventArgs e)
         {
-            if (Convert.ToDateTime(txtDate.SelectedDate.ToShortDateString()) > DateTime.Today)
-            {
                 selectTime.Items.Clear();
                 formatDate = Global.Format_Date("select CONVERT(char(10), '" + txtDate.SelectedDate.ToShortDateString() + "',103) as date");
                 Global.Check_Appointments(txtEmail.Text.Trim(), formatDate);
                 GetTime();
                 EnableTime();
                 check = false;
-            }
-            else
-            {
-                selectTime.Items.Clear();
-                GetTime();
-            }
         }
 
     }
-}
+}   

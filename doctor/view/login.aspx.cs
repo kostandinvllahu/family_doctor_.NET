@@ -14,6 +14,7 @@ namespace doctor.view
         {
             
             Session.Contents.RemoveAll();
+            DemoTest();
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -71,6 +72,12 @@ namespace doctor.view
         protected void ckbDoc_CheckedChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void DemoTest()
+        {
+            DemoTest test = new DemoTest();
+            Response.Write(test.username + " " + test.password);
         }
     }
 }

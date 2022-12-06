@@ -29,7 +29,7 @@ namespace doctor.view
                     Id = Convert.ToInt32(Session["doctorId"])
                 };
                 EnableTime();
-                GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "'");
+                GetAppointments("select * from appointments where patientname='" + Session["username"].ToString() + "' order by date asc");
             }
             EnableTime();
         }
