@@ -77,7 +77,11 @@ namespace doctor.view
                 lblError.Text = "Opss.. Something went wrong!";
                 return;
             }
-            
         }
-    }
+
+        protected void btnGoogle_Click(object sender, EventArgs e)
+        {
+            //nothing yet
+        }
+     }
 }
