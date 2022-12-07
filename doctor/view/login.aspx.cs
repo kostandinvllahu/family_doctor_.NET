@@ -87,6 +87,7 @@ namespace doctor.view
                     Session["username"] = txtusername.Text;
                     Session["password"] = txtpassword.Text;
                     Session["doctorEmail"] = doc.email;
+                    Session["doctorId"] = doc.Id;
                     Response.Redirect("doctor.aspx");
                 }
                 else

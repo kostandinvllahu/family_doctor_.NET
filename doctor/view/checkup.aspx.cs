@@ -52,6 +52,7 @@ namespace doctor.view
                 Comment = txtComment.Text.Trim(),
                 Time = selectTime.SelectedItem.Value,
                 Date = txtDate.SelectedDate.ToShortDateString()
+
             };
             CheckTime(Convert.ToDateTime(selectTime.SelectedItem.Value), Convert.ToDateTime(txtDate.SelectedDate.ToShortDateString()), txtDate.SelectedDate.DayOfWeek.ToString());
             if (check)
