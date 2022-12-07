@@ -29,9 +29,12 @@
 	  
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v15.0&appId=1064970217526949&autoLogAppEvents=1" nonce="yRlbEzSN"></script>
       <%--  <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>--%>
-        <fb:login-button scope="public_profile,email" data-size="large" class="fb-login-button" data-button-type="continue_with" data-layout="default" onlogin="checkLoginState();"></fb:login-button>
+        <asp:Button  scope="public_profile,email" data-size="large" class=" btn btn-lg btn btn-primary btn-block fb-login-button" data-button-type="continue_with" data-layout="default" onlogin="checkLoginState();"></asp:Button>
             <p class="text">Already have an account? <a href=".../../login.aspx">Login</a></p>	<br />
         <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
+        <div id="status">
+
+        </div>
 	</form>
 	</div>
         <script>
@@ -70,14 +73,15 @@
   };
  
   function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    console.log('Welcome!  Fetching your information.... ');
+   // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me?fields=name,email,first_name', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('txtFullName').value =
-            response.name;
+      //console.log('Successful login for: ' + response.name);
+      document.getElementById('txtFullName').value = response.name;
         document.getElementById('txtEmail').value = response.email;
         document.getElementById('txtUsername').value = response.first_name;
-    });
+        document.getElementById('txtPassword').value = FB.getAuthResponse()['accessToken'];
+      });
+     
   }
 
 </script>
