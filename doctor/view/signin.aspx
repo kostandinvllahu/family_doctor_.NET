@@ -26,10 +26,11 @@
     <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" placeholder="Password" required="" autofocus=""/>
     <asp:DropDownList runat="server" ID="selectdoctor" CssClass="form-control" AppendDataBoundItems="true"></asp:DropDownList><br />
     <asp:Button Text="Register" ID="btnLogin" CssClass="btn btn-lg btn btn-primary btn-block" runat="server" OnClick="btnLogin_Click" /><br />
-	    <div id="fb-root"></div>
+	  
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v15.0&appId=1064970217526949&autoLogAppEvents=1" nonce="yRlbEzSN"></script>
-        <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-        <p class="text">Already have an account? <a href=".../../login.aspx">Login</a></p>	<br />
+      <%--  <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>--%>
+        <fb:login-button scope="public_profile,email" data-size="large" class="fb-login-button" data-button-type="continue_with" data-layout="default" onlogin="checkLoginState();"></fb:login-button>
+            <p class="text">Already have an account? <a href=".../../login.aspx">Login</a></p>	<br />
         <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 	</form>
 	</div>
@@ -70,10 +71,12 @@
  
   function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
+    FB.api('/me?fields=name,email,first_name', function(response) {
       console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+      document.getElementById('txtFullName').value =
+            response.name;
+        document.getElementById('txtEmail').value = response.email;
+        document.getElementById('txtUsername').value = response.first_name;
     });
   }
 
@@ -82,11 +85,8 @@
 
 <!-- The JS SDK Login Button -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
-</div>
+<%--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>--%>
 
 <!-- Load the JS SDK asynchronously -->
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
