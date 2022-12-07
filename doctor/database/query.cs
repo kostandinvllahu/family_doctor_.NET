@@ -76,7 +76,6 @@ namespace doctor.database
                 return con.Execute(sql, user) > 0;
             }
         }
-
     }
 
 }

@@ -82,7 +82,7 @@ namespace doctor.view
         {
             if (!txtSearch.Text.Equals(""))
             {
-                GetAppointments("select * from appointments where concat(Id, service, comment, time, date) Like '%" + txtSearch.Text + "%'");
+                GetAppointments("select * from appointments where concat(Id, service, comment, time, date) Like '%" + txtSearch.Text + "%' and patientname='"+ Session["username"].ToString() + "'");
             }
             else
             {
