@@ -19,6 +19,33 @@ namespace doctor.view
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            if (Request.Cookies["accessToken"] != null) //shiko ketu te besh kodin invisible
+            {
+                if (txtpassword.Text.Equals(Request.Cookies["accessToken"].Value))
+                {
+                    var fb_username = txtusername.Text.Trim();
+                    var fb_password = txtpassword.Text.Trim();
+
+                    var fb_obj = new Users
+                    {
+                        username = fb_username
+                    };
+                    string sql = "SELECT * from login where username=@username COLLATE SQL_Latin1_general_CP1_CS_AS";
+                    var fb_user = Query.Login(fb_obj, sql);
+                    if(fb_user != null)
+                    {
+                        Session["username"] = txtusername.Text;
+                        Session["password"] = txtpassword.Text;
+                        Session["doctorId"] = fb_user.doctor;
+                        Response.Redirect("main.aspx");
+                    }
+                    else
+                    {
+                        lblError.Text = "Wrong username/password";
+                        return;
+                    }
+                }
+            }
             lblError.Text = "";
             var username = txtusername.Text.Trim();
             var password = txtpassword.Text.Trim();
@@ -32,7 +59,8 @@ namespace doctor.view
 
             if (ckbDoc.Checked == false)
             {
-                var user = Query.Login(obj);
+                string sqlQuery = "SELECT * from login where username=@username COLLATE SQL_Latin1_general_CP1_CS_AS and password=@password COLLATE SQL_Latin1_general_CP1_CS_AS";
+                var user = Query.Login(obj,sqlQuery);
                 if (user != null)
                 {
                     Session["username"] = txtusername.Text;

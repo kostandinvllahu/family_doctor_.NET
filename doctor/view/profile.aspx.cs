@@ -68,6 +68,7 @@ namespace doctor.view
             }
         }
 
+
         private void GetValues()
         {
             var obj = new Users
@@ -75,8 +76,8 @@ namespace doctor.view
                 username = Session["username"].ToString(),
                 password = Session["password"].ToString()
             };
-
-            var user = Query.Login(obj);
+            string sql = "SELECT * from login where username=@username COLLATE SQL_Latin1_general_CP1_CS_AS";
+            var user = Query.Login(obj, sql);
             if (user != null)
             {
                 txtFullName.Text = user.fullname;

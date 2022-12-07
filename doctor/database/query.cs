@@ -8,10 +8,8 @@ namespace doctor.database
 {
     public class Query
     {
-        public static Users Login(Users obj)
+        public static Users Login(Users obj, string sqlQuery)
         {
-            string sqlQuery = "SELECT * from login where username=@username COLLATE SQL_Latin1_general_CP1_CS_AS and password=@password COLLATE SQL_Latin1_general_CP1_CS_AS";
-
             using (var con = Script.GetConnection())
             {
                 return con.Query <Users>(sqlQuery, obj).FirstOrDefault();
