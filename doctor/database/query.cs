@@ -60,14 +60,14 @@ namespace doctor.database
             }
         }
 
-        public static appointment Check_Future_Appointments(appointment book, String sql)
-        {
+        //public static appointment Check_Future_Appointments(appointment book, String sql) DEAD CODE
+        //{
           
-            using (var con = Script.GetConnection())
-            {
-                return con.Query<appointment>(sql, book).FirstOrDefault(); 
-            }
-        }
+        //    using (var con = Script.GetConnection())
+        //    {
+        //        return con.Query<appointment>(sql, book).FirstOrDefault(); 
+        //    }
+        //}
 
         public static bool Update(Object user, String sql)
         {

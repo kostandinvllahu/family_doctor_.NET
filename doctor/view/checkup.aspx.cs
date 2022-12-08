@@ -130,28 +130,28 @@ namespace doctor.view
                         check = false;
                     }
                 }
-
-                if (selectDay > DateTime.Today)
-                {
-                    //string formatDate =  Global.Format_Date("SELECT [dbo].[ufn_GetDateOnly] ('"+ selectDay + "') as date");
-                    formatDate = Global.Format_Date("select CONVERT(char(10), '" + selectDay + "',103) as date");
-                    var appointments = new appointment()
-                    {
-                        Date = formatDate,
-                        Time = selectTime.SelectedItem.Value,
-                        Doctoremail = txtEmail.Text.Trim()
-                    };
-                    sql = "select * from appointments where date=@Date and time=@Time  and doctoremail=@Doctoremail";
-                    var book = Query.Check_Future_Appointments(appointments, sql);
-                    if (book != null)
-                    {
-                        lblError.Text = "This time is already booked please choose another time";
-                        selectTime.Items.Clear();
-                        GetTime();
-                        EnableTime();
-                        check = false;
-                    }
-                }
+                //THIS IS A DEAD CODE WAS MADE AT FIRST TO NOTIFY THE PATIENT THAT X FUTURE DATE IS ALREADY BOOKED
+                //if (selectDay > DateTime.Today) 
+                //{
+                //    //string formatDate =  Global.Format_Date("SELECT [dbo].[ufn_GetDateOnly] ('"+ selectDay + "') as date");
+                //    formatDate = Global.Format_Date("select CONVERT(char(10), '" + selectDay + "',103) as date");
+                //    var appointments = new appointment()
+                //    {
+                //        Date = formatDate,
+                //        Time = selectTime.SelectedItem.Value,
+                //        Doctoremail = txtEmail.Text.Trim()
+                //    };
+                //    sql = "select * from appointments where date=@Date and time=@Time  and doctoremail=@Doctoremail";
+                //    var book = Query.Check_Future_Appointments(appointments, sql);
+                //    if (book != null)
+                //    {
+                //        lblError.Text = "This time is already booked please choose another time";
+                //        selectTime.Items.Clear();
+                //        GetTime();
+                //        EnableTime();
+                //        check = false;
+                //    }
+                //}
             }
         }
 
