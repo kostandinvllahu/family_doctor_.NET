@@ -63,6 +63,19 @@ namespace doctor.view
                 return;
             }
 
+            lblError.Text = "";
+            if (txtPassword.Text != "" && txtPassword.Text.Length <= 8)
+            {
+                lblError.Text = "Your password must be more then 8 characters long";
+                return;
+            }
+
+            if (txtPassword.Text != "" && !txtPassword.Text.Any(char.IsUpper))
+            {
+                lblError.Text = "Your password must contain one upper case character";
+                return;
+            }
+
             var obj = new database.Doctor
             {
                 fullname = txtFullName.Text.Trim(),
@@ -90,7 +103,7 @@ namespace doctor.view
                 lblError.Text = "Data failed to update please try again";
             }
             string formatDate = Global.Format_Date("select CONVERT(char(10), '" + DateTime.Today.ToString() + "',103) as date");
-            sql = "UPDATE appointments set doctorname=@fullname, doctoremail=@email where doctorusername='" + Session["username"].ToString() + "' and date >= '" + formatDate + "'";
+            sql = "UPDATE appointments set doctorname=@fullname, doctoremail=@email where doctorusername=(select Id from doctor where username='"+Session["username"].ToString()+"') and date >= '" + formatDate + "'";
             if(Query.Update(obj, sql))
             {
                 lblError.Text = "Data updated successfully!";

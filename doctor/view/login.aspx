@@ -28,8 +28,7 @@
       <%--  <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>--%>
         <asp:Button  scope="public_profile,email" data-size="large" class=" btn btn-lg btn btn-primary btn-block fb-login-button" data-button-type="continue_with" data-layout="default" onlogin="checkLoginState();"></asp:Button>
 	<p class="text">Dont have an account? <a href=".../../signin.aspx">Register</a></p>	
-    <asp:Checkbox runat="server" ID="ckbDoc" Text="Login as doctor" OnCheckedChanged="ckbDoc_CheckedChanged" OnClick="ckbDoc_Click"></asp:Checkbox>
-	<p class="text"><a href="#">Forgot Password</a></p><br />
+    <asp:Checkbox runat="server" ID="ckbDoc" Text="Login as doctor" OnCheckedChanged="ckbDoc_CheckedChanged" OnClick="ckbDoc_Click"></asp:Checkbox><br />
          <asp:Label Text="" ID="lblError" ForeColor="Red" Font-Bold="true" runat="server" />
 	</form>
 	</div>

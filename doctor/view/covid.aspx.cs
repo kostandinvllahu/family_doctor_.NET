@@ -47,13 +47,14 @@ namespace doctor.view
                 Service = selectService.SelectedItem.Text,
                 Comment = txtComment.Text.Trim(),
                 Time = selectTime.SelectedItem.Value,
-                Date = txtDate.SelectedDate.ToShortDateString()
+                Date = txtDate.SelectedDate.ToShortDateString(),
+                DoctorUsername = Session["doctorId"].ToString()
             };
             CheckTime(Convert.ToDateTime(selectTime.SelectedItem.Value), Convert.ToDateTime(txtDate.SelectedDate.ToShortDateString()), txtDate.SelectedDate.DayOfWeek.ToString());
             if (check)
             {
-                sql = "INSERT INTO appointments (doctorname, doctoremail, patientname, service, comment, time, date, status) VALUES" +
-                    " (@Doctorname, @Doctoremail, @Patientname, @Service, @Comment, @Time, @Date, 1)";
+                sql = "INSERT INTO appointments (doctorname, doctoremail, patientname, service, comment, time, date, status,doctorusername) VALUES" +
+                    " (@Doctorname, @Doctoremail, @Patientname, @Service, @Comment, @Time, @Date, 1, @DoctorUsername)";
                 if (Query.Insert(appointment, sql))
                 {
 

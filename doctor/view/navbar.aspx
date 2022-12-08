@@ -29,8 +29,6 @@
             <ul>
 			<li><a href="main.aspx">Services</a></li>
 			<li><a href="profile.aspx">Profile of user</a></li>
-			<li><a href="news.aspx">News</a></li>
-			<li><a href="about.aspx">About</a></li> 
 			<li><a href="login.aspx">Log out</a></li>
 			</ul>
         </div>

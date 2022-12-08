@@ -111,6 +111,7 @@ namespace doctor.view
                 lblError.Text = "There are no values to be downloaded please try again.";
                 return;
             }
+            formatDate = Global.Format_Date("select CONVERT(char(10), '" + DateTime.Today.ToString() + "',103) as date");
             string attachment = "attachment; filename=DoctorFreeTime" + formatDate + ".xls";
             Response.ClearContent();
             Response.AddHeader("content-disposition", attachment);
